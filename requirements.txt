@@ -3,7 +3,4 @@ mysql-connector-python==8.0.33
 google-cloud-pubsub==2.13.2
 bcrypt==4.0.1
 Werkzeug==2.0.3
-<<<<<<< HEAD
-=======
-sendgrid==6.9.1
->>>>>>> 61ec22a (upload)
+sendgrid==6.9.1  #api
