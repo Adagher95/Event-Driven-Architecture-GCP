@@ -13,5 +13,27 @@ steps:
       - "push"
       - "gcr.io/$PROJECT_ID/flask-app:$SHORT_SHA"
 
+  # Step 3: Deploy to the app-cluster
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      - "set"
+      - "image"
+      - "deployment/flask-app-deployment"
+      - "flask-app=gcr.io/$PROJECT_ID/flask-app:$SHORT_SHA"
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=us-central1"
+      - "CLOUDSDK_CONTAINER_CLUSTER=app-cluster"
+
+  # Step 4: Deploy to the management-cluster
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      - "set"
+      - "image"
+      - "deployment/flask-app-deployment"
+      - "flask-app=gcr.io/$PROJECT_ID/flask-app:$SHORT_SHA"
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=us-west1"
+      - "CLOUDSDK_CONTAINER_CLUSTER=management-cluster"
+
 images:
   - "gcr.io/$PROJECT_ID/flask-app:$SHORT_SHA"
