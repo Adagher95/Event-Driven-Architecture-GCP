@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-# config.py
-
-=======
 # config.py for cloudSQL
->>>>>>> 365bd51 (initial commit)
 
 DATABASE_CONFIG = {
         'host': '10.241.16.3',
