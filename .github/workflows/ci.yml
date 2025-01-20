@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Authentication steps
+      # Authentication step
       - name: Set up GCP credentials
         uses: google-github-actions/setup-gcloud@v2
         with:
