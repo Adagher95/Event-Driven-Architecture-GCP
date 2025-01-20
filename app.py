@@ -70,7 +70,7 @@ def submit():
                     cursor.execute(insert_query, (name, email, address, phonenumber, hashed_password))
                     db.commit()
 
-            # Publish message to Pub/Sub
+            # Publish message to Pub/Sub The Name an Email
             message_data = {"name": name, "email": email}
             try:
                 future = publisher.publish(topic_path, json.dumps(message_data).encode("utf-8"))
