@@ -7,7 +7,7 @@ from config import DATABASE_CONFIG
 
 app = Flask(__name__)
 
-# MySQL connection pooling
+# MySQL connection pooling for more availability
 connection_pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
     pool_size=5,  # Adjust based on traffic requirements
