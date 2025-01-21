@@ -25,3 +25,4 @@ jobs:
     - name: Push Docker Image to Container Registry (GCR)
       run: |-
         docker push us-docker.pkg.dev/iac-infra-proj-prod/flask-app-repo/flask-app:v2.1
+
