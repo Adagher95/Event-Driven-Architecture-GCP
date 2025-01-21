@@ -12,7 +12,7 @@ jobs:
 
     - uses: google-github-actions/setup-gcloud@v2
       with:
-        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+        service_account_key: "github@iac-infra-proj-prod.iam.gserviceaccount.com"
         project_id: iac-infra-proj-prod
         export_default_credentials: true
 
