@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      serviceAccountName: pubsub-app-sa
+      containers:
+      - name: flask-app
+        image: gcr.io/iac-infra-proj-prod/flask-app:v2
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_HOST
+          value: "10.241.16.3"
+        - name: DATABASE_USER
+          value: "ahmad-gcp"
+        - name: DATABASE_PASSWORD
+          value: "GCP-database1"
+        - name: DATABASE_NAME
+          value: "app-sql_prod"
+        - name: PUBSUB_PROJECT_ID
+          value: "iac-infra-proj-prod"
+        - name: PUBSUB_TOPIC_ID
+          value: "user-submit-topic"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  selector:
+    app: flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080  
+      nodePort: 30080 
+  type: NodePort
