@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: github-actions
-      PROJECT_ID: devopsbyexample-325402
+      PROJECT_ID: iac-infra-proj-prod
     steps:
     - name: Checkout
       uses: actions/checkout@v2
