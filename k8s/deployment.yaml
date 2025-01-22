@@ -16,7 +16,7 @@ spec:
       serviceAccountName: pubsub-app-sa
       containers:
       - name: flask-app
-        image: gcr.io/iac-infra-proj-prod/flask-app:v2
+        image: us-docker.pkg.dev/iac-infra-proj-prod/gcr.io/flask-app:v2.1
         ports:
         - containerPort: 8080
         env:
