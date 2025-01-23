@@ -2,8 +2,8 @@ config.py
 _pycache_/*
 ./_pycache_/
 .terraform/
-GCP-IaC/main/Credentials/Creds.json
+GCP-IaC/main/Credentials/*json
 GCP-IaC/main/cloud-function-src/*.py
 GCP-IaC/main/terraform.tfvars
 GCP-IaC/core/terraform.tfvars
-GCP-IaC/core/Credentials/Creds.json
+GCP-IaC/core/Credentials/*json
