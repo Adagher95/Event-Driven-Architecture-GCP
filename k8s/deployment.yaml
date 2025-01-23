@@ -21,35 +21,17 @@ spec:
         - containerPort: 8080
         env:
         - name: DATABASE_HOST
-          valueFrom:
-            secretKeyRef:
-              name: database-secrets
-              key: DATABASE_HOST
+          value: "10.241.16.3"
         - name: DATABASE_USER
-          valueFrom:
-            secretKeyRef:
-              name: database-secrets
-              key: DATABASE_USER
+          value: "ahmad-gcp"
         - name: DATABASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: database-secrets
-              key: DATABASE_PASSWORD
+          value: "GCP-database1"
         - name: DATABASE_NAME
-          valueFrom:
-            secretKeyRef:
-              name: database-secrets
-              key: DATABASE_NAME
+          value: "app-sql_prod"
         - name: PUBSUB_PROJECT_ID
-          valueFrom:
-            secretKeyRef:
-              name: pubsub-secrets
-              key: PUBSUB_PROJECT_ID
+          value: "iac-infra-proj-prod"
         - name: PUBSUB_TOPIC_ID
-          valueFrom:
-            secretKeyRef:
-              name: PUBSUB_TOPIC_ID
-              key: topic_id
+          value: "user-submit-topic"
 ---
 apiVersion: v1
 kind: Service
@@ -59,7 +41,8 @@ spec:
   selector:
     app: flask-app
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: ClusterIP
+    - protocol: TCP
+      port: 80           
+      targetPort: 8080   
+  type: ClusterIP        
+
