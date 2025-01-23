@@ -69,15 +69,12 @@ resource "google_sql_database" "cloud_sql_app_db" {
 
 # The app database user
 resource "google_sql_user" "cloud_sql_app_db_user" {
-  name     = "ahmad-gcp"
+  name     = data.google_secret_manager_secret_version.cloud_sql_db_user_name_var.secret_data
   project  = var.service_project_id
   instance = google_sql_database_instance.mysql_instance.name
   host     = "%"
-  password = "GCP-database1"
+  password = data.google_secret_manager_secret_version.cloud_sql_db_user_pass_var.secret_data
 
-  depends_on = [
-    google_sql_database_instance.mysql_instance
-  ]
 }
 
 

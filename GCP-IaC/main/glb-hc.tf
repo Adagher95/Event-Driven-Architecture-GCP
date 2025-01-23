@@ -9,15 +9,15 @@ resource "google_compute_health_check" "health_check_glb" {
   unhealthy_threshold = 2
 
   http_health_check {
-    port = "30080"
-    port_name = var.named_ports.app.port_name
+    port = "80"
+    request_path = "/"
   
   }
 }
 
 # Health Check IGM
 resource "google_compute_health_check" "health_check_igm" {
-  name    = "hc-tcp-30080-${var.service_project_id}-igm"
+  name    = "hc-tcp-80-${var.service_project_id}-igm"
   project = var.service_project_id
 
   timeout_sec         = 15
@@ -26,8 +26,7 @@ resource "google_compute_health_check" "health_check_igm" {
   unhealthy_threshold = 2
 
   http_health_check {
-    port = "30080"
-    port_name = var.named_ports.app.port_name
-  
+    port = "80"
+    request_path = "/"  
   }
 }

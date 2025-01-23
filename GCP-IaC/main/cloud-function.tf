@@ -30,7 +30,7 @@ resource "google_cloudfunctions_function" "function_cr" {
   }
 
   environment_variables = {
-    SENDGRID_API_KEY = var.sendgrid_api_key 
-  }
+    SENDGRID_API_KEY = data.google_secret_manager_secret_version.sendgrid_api_key.secret_data
+}
 }
 

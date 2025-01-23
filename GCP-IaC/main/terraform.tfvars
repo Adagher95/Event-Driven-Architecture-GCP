@@ -3,7 +3,7 @@ credentials_file = "Credentials\\Creds.json"
 gcp_region = "us-west1"
 gcp_zone = "us-west1-a"
 organization_id = "410699974645" 
-billing_account = "01D257-D34288-8AFA4D"
+
 
 gcp_region_1 = "us-central1"
 gcp_region_2 = "us-west1"
@@ -15,6 +15,7 @@ gcp_zone_3 = "me-central1-a"
 
 host_project_id    = "iac-network-proj-prod"
 service_project_id = "iac-infra-proj-prod"
+security_project_id = "iac-security-proj-prod"
 
 host_project_number = "694603014208"
 service_project_number = "568331077048"
@@ -90,9 +91,16 @@ iac-infra-proj-prod-services = [
   "cloudtrace.googleapis.com",
   "oslogin.googleapis.com",
   "pubsub.googleapis.com",
-  "cloudfunctions.googleapis.com"
+  "cloudfunctions.googleapis.com",
+  "gkehub.googleapis.com",
+  "multiclusterservicediscovery.googleapis.com"
   ]
 
+
+iac-security-proj-prod-services = [
+  "secretmanager.googleapis.com"
+  
+]
 gke_cluster_1_name = "app-cluster"
 
 gke_cluster_2_name = "management-cluster"
@@ -124,6 +132,8 @@ gke_cluster_1_autoscaling = {
   max_node_count = "2"
 }
 
+cluster_service_account = "pubsub-app-sa@iac-infra-proj-prod.iam.gserviceaccount.com"
+
 gke_cluster_2_autoscaling = {
   min_node_count = "1"   
   max_node_count = "2"
@@ -151,7 +161,7 @@ pubsub_topic_name = "user-submit-topic"
 pubsub_subscription_name = "user-submit-subscription"
 
 cloud_function_name ="Email-Confirmation"
-sendgrid_api_key = "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"
+
 entry_point = "send_email"
 
 named_ports = {
@@ -161,10 +171,3 @@ named_ports = {
   }
 }
 
-github_owner = "Adagher95"
-github_repo = "Event-Driven-Architecture-GCP"
-
-cloud_build_trigger = "flask-app-trigger"
-gcp_location = "global"
-
-cloudbuild_trigger_file = "./cloudbuild.yaml"

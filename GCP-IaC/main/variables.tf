@@ -25,10 +25,6 @@ variable "organization_id" {
   description = "The value of the organization ID"
 }
 
-variable "billing_account" {
-  type        = string
-  description = "The ID of the billing account that I will be using for this environment"
-}
 
 variable "host_project_id" {
   description = "Project in which GCP Resources Shared VPC to be created"
@@ -37,6 +33,11 @@ variable "host_project_id" {
 
 variable "service_project_id" {
   description = "Project in which is linked to the Shared VPC"
+  type        = string
+}
+
+variable "security_project_id" {
+  description = "Project in which is responsible for Security"
   type        = string
 }
 
@@ -80,6 +81,11 @@ variable "gcp_region_4" {
   type        = string
 }
 variable "iac-infra-proj-prod-services" {
+  type        = list(string)
+  description = "The list of the services that we want to enable in the GCP project"
+}
+
+variable "iac-security-proj-prod-services" {
   type        = list(string)
   description = "The list of the services that we want to enable in the GCP project"
 }
@@ -217,6 +223,11 @@ variable "gke_cluster_2_node_pool_name" {
   description = "The value of the Management cluster node pool name"
 }
 
+variable "cluster_service_account" {
+  type        = string
+  description = "The value of the cluster service account"
+}
+
 variable "use_ip_aliases" {
   description = "Whether to use IP aliases for the GKE clusters"
   type        = bool
@@ -317,10 +328,6 @@ variable "cloud_function_name" {
   default     = "email-cloud-function"
 }
 
-variable "sendgrid_api_key" {
-  type = string
-  description = "The API key"
-}
 
 variable "entry_point" {
   type = string
@@ -342,28 +349,4 @@ variable "app_name" {
   description = "The value of the App name"
 }
 
-variable "github_owner" {
-  description = "GitHub username or organization"
-  type        = string
-}
 
-variable "github_repo" {
-  description = "GitHub repository name"
-  type        = string
-}
-
-
-variable "cloud_build_trigger" {
-  description = "The Cloud Build Trigger name"
-  type        = string
-}
-
-variable "gcp_location" {
-  description = "The Cloud Build location"
-  type        = string
-}
-
-variable "cloudbuild_trigger_file" {
-  type        = string
-  description = "The cloud build trigger file location"
-}

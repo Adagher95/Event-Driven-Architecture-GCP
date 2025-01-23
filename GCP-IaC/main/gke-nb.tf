@@ -6,7 +6,7 @@ resource "google_container_node_pool" "app_cluster_nodes" {
   project    = google_container_cluster.app_cluster.project
 
   node_config {
-    service_account = "pubsub-app-sa@iac-infra-proj-prod.iam.gserviceaccount.com"
+    service_account = var.cluster_service_account
     machine_type = var.node_config_1.machine_type
     disk_size_gb = var.node_config_1.disk_size_gb
     disk_type    = var.node_config_1.disk_type
@@ -34,7 +34,7 @@ resource "google_container_node_pool" "management_cluster_nodes" {
   project    = google_container_cluster.management_cluster.project
 
   node_config {
-    service_account = "pubsub-app-sa@iac-infra-proj-prod.iam.gserviceaccount.com"
+    service_account = var.cluster_service_account
     machine_type = var.node_config_2.machine_type
     disk_size_gb = var.node_config_2.disk_size_gb
     disk_type    = var.node_config_2.disk_type

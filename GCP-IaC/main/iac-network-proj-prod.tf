@@ -2,7 +2,7 @@
 resource "google_project" "iac-network-proj-prod" {
   name       = "iac-network-proj-prod"
   project_id = "iac-network-proj-prod"
-  billing_account = var.billing_account
+  billing_account = data.google_secret_manager_secret_version.billing_account.secret_data
   folder_id = google_folder.network.id
 }
 
@@ -23,7 +23,7 @@ resource "google_project_service" "iac-network-proj-prod-services" {
 
 # Budget & Alerts
 resource "google_billing_budget" "iac-network-proj-prod_budget" {
-  billing_account = var.billing_account
+  billing_account = data.google_secret_manager_secret_version.billing_account.secret_data
   display_name    = "Billing Budget Network-Project"
 
   budget_filter {
