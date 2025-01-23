@@ -25,7 +25,7 @@ jobs:
 
     # Build Docker image
     - name: Build Docker Image
-      run: docker build -t us-docker.pkg.dev/iac-infra-proj-prod/gcr.io/flask-app:v2 .
+      run: docker build -f source/Dockerfile -t us-docker.pkg.dev/iac-infra-proj-prod/gcr.io/flask-app:v2 .
 
     # Configure Docker to authenticate with Artifact Registry
     - name: Configure Docker Client
