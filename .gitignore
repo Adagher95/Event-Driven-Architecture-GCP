@@ -7,3 +7,5 @@ GCP-IaC/main/cloud-function-src/*.py
 GCP-IaC/main/terraform.tfvars
 GCP-IaC/core/terraform.tfvars
 GCP-IaC/core/Credentials/*json
+secret.yaml
+
