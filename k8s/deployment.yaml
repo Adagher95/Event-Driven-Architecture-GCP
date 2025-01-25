@@ -51,13 +51,13 @@ spec:
               name: flask-app-secrets
               key: PUBSUB_TOPIC_ID
 
-        readinessProbe: # Ensure the app is ready before sending traffic
+        readinessProbe: 
           httpGet:
             path: /health
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
-        livenessProbe: # Restart the container if it becomes unhealthy
+        livenessProbe: 
           httpGet:
             path: /health
             port: 8080
@@ -69,14 +69,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: url-map-iac-infra-proj1-prod   # Specify the name for your load balancer
+  name: url-map-iac-infra-proj1-prod   
   namespace: default
   annotations:
-    cloud.google.com/load-balancer-type: "external"  # Creates an external load balancer
+    cloud.google.com/load-balancer-type: "external"  
 spec:
   type: LoadBalancer
   selector:
     app: flask-app
   ports:
-  - port: 80  # External port exposed by the load balancer
-    targetPort: 8080  # Port inside the container
+  - port: 80  
+    targetPort: 8080  
