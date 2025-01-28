@@ -8,5 +8,11 @@ GCP-IaC/main/terraform.tfvars
 GCP-IaC/core/terraform.tfvars
 GCP-IaC/core/Credentials/Creds.json
 GCP-IaC/main/cloud-function-src/main.py 
+GCP-IaC/core/.terraform.lock.hcl
+GCP-IaC/main/.terraform.lock.hcl
+GCP-IaC/core/terraform.tfstate.backup
+GCP-IaC/core/terraform.tfstate
+GCP-IaC/core/state.json
+
 
 
