@@ -21,24 +21,43 @@ spec:
         - containerPort: 8080
         env:
         - name: DATABASE_HOST
-          value: "10.241.16.3"  # Cloud SQL Private IP
+          valueFrom:
+            secretKeyRef:
+              name: flask-app-secrets
+              key: DATABASE_HOST
         - name: DATABASE_USER
-          value: "ahmad-gcp"
+          valueFrom:
+            secretKeyRef:
+              name: flask-app-secrets
+              key: DATABASE_USER
         - name: DATABASE_PASSWORD
-          value: "GCP-database1"
+          valueFrom:
+            secretKeyRef:
+              name: flask-app-secrets
+              key: DATABASE_PASSWORD
         - name: DATABASE_NAME
-          value: "app-sql_prod"
+          valueFrom:
+            secretKeyRef:
+              name: flask-app-secrets
+              key: DATABASE_NAME
         - name: PUBSUB_PROJECT_ID
-          value: "iac-infra-proj-prod"
+          valueFrom:
+            secretKeyRef:
+              name: flask-app-secrets
+              key: PUBSUB_PROJECT_ID
         - name: PUBSUB_TOPIC_ID
-          value: "user-submit-topic"
-        readinessProbe: # Ensure the app is ready before sending traffic
+          valueFrom:
+            secretKeyRef:
+              name: flask-app-secrets
+              key: PUBSUB_TOPIC_ID
+
+        readinessProbe: 
           httpGet:
             path: /health
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
-        livenessProbe: # Restart the container if it becomes unhealthy
+        livenessProbe: 
           httpGet:
             path: /health
             port: 8080
@@ -50,14 +69,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: url-map-iac-infra-proj1-prod   # Specify the name for your load balancer
+  name: url-map-iac-infra-proj1-prod   
   namespace: default
   annotations:
-    cloud.google.com/load-balancer-type: "external"  # Creates an external load balancer
+    cloud.google.com/load-balancer-type: "external"  
 spec:
   type: LoadBalancer
   selector:
     app: flask-app
   ports:
-  - port: 80  # External port exposed by the load balancer
-    targetPort: 8080  # Port inside the container
+  - port: 80  
+    targetPort: 8080  
