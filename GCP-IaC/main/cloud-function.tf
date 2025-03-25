@@ -3,7 +3,7 @@ resource "google_storage_bucket" "cloud_function_bkt" {
   name          = "cloud-fun-${var.service_project_id}-src-bkt"
   force_destroy = false
   location      = "US"
-  project = var.service_project_id
+  project       = var.service_project_id
 }
 
 resource "google_storage_bucket_object" "source_code" {
@@ -14,14 +14,14 @@ resource "google_storage_bucket_object" "source_code" {
 
 # Google Cloud Function 
 resource "google_cloudfunctions_function" "function_cr" {
-  name        = var.cloud_function_name
-  runtime     = "python310"
+  name    = var.cloud_function_name
+  runtime = "python310"
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.cloud_function_bkt.name
   source_archive_object = google_storage_bucket_object.source_code.name
-  project          = var.service_project_id
-  region           = var.gcp_region_1
+  project               = var.service_project_id
+  region                = var.gcp_region_1
   entry_point           = var.entry_point
 
   event_trigger {
@@ -31,6 +31,6 @@ resource "google_cloudfunctions_function" "function_cr" {
 
   environment_variables = {
     SENDGRID_API_KEY = data.google_secret_manager_secret_version.sendgrid_api_key.secret_data
-}
+  }
 }
 

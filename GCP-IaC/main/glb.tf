@@ -30,47 +30,49 @@ resource "google_compute_backend_service" "app_backend_service" {
 
   # Backend for gke-app-cluster node pools
   backend {
-    group = "projects/${var.service_project_id}/zones/us-central1-a/instanceGroups/gke-app-cluster-app-cluster-node-pool-7aa23b93-grp"
-    balancing_mode         = "UTILIZATION"
-    max_utilization        = 0.8
-    capacity_scaler        = 0.8
+    group           = "projects/${var.service_project_id}/zones/us-central1-a/instanceGroups/gke-app-cluster-app-cluster-node-pool-7aa23b93-grp"
+    balancing_mode  = "UTILIZATION"
+    max_utilization = 0.8
+    capacity_scaler = 0.8
   }
 
   backend {
-    group = "projects/${var.service_project_id}/zones/us-central1-b/instanceGroups/gke-app-cluster-app-cluster-node-pool-f895708d-grp"
-    balancing_mode         = "UTILIZATION"
-    max_utilization        = 0.8
-    capacity_scaler        = 0.8
+    group           = "projects/${var.service_project_id}/zones/us-central1-b/instanceGroups/gke-app-cluster-app-cluster-node-pool-f895708d-grp"
+    balancing_mode  = "UTILIZATION"
+    max_utilization = 0.8
+    capacity_scaler = 0.8
   }
 
   backend {
-    group = "projects/${var.service_project_id}/zones/us-central1-c/instanceGroups/gke-app-cluster-app-cluster-node-pool-1d00657d-grp"
-    balancing_mode         = "UTILIZATION"
-    max_utilization        = 0.8
-    capacity_scaler        = 0.8
+    group           = "projects/${var.service_project_id}/zones/us-central1-c/instanceGroups/gke-app-cluster-app-cluster-node-pool-1d00657d-grp"
+    balancing_mode  = "UTILIZATION"
+    max_utilization = 0.8
+    capacity_scaler = 0.8
   }
 
   # Backend for gke-management-clust node pools
   backend {
-    group = "projects/${var.service_project_id}/zones/us-west1-a/instanceGroups/gke-management-clust-management-clust-d6c7db7b-grp"
-    balancing_mode         = "UTILIZATION"
-    max_utilization        = 0.8
-    capacity_scaler        = 0.8
+    group           = "projects/${var.service_project_id}/zones/us-west1-a/instanceGroups/gke-management-clust-management-clust-d6c7db7b-grp"
+    balancing_mode  = "UTILIZATION"
+    max_utilization = 0.8
+    capacity_scaler = 0.8
   }
 
   backend {
-    group = "projects/${var.service_project_id}/zones/us-west1-b/instanceGroups/gke-management-clust-management-clust-7537400a-grp"
-    balancing_mode         = "UTILIZATION"
-    max_utilization        = 0.8
-    capacity_scaler        = 0.8
+    group           = "projects/${var.service_project_id}/zones/us-west1-b/instanceGroups/gke-management-clust-management-clust-7537400a-grp"
+    balancing_mode  = "UTILIZATION"
+    max_utilization = 0.8
+    capacity_scaler = 0.8
   }
 
   backend {
-    group = "projects/${var.service_project_id}/zones/us-west1-c/instanceGroups/gke-management-clust-management-clust-5a22573e-grp"
-    balancing_mode         = "UTILIZATION"
-    max_utilization        = 0.8
-    capacity_scaler        = 0.8
+    group           = "projects/${var.service_project_id}/zones/us-west1-c/instanceGroups/gke-management-clust-management-clust-5a22573e-grp"
+    balancing_mode  = "UTILIZATION"
+    max_utilization = 0.8
+    capacity_scaler = 0.8
   }
+
+  #security_policy = google_compute_security_policy.cloud_armor_owasp.name
 
   depends_on = [
     google_compute_health_check.health_check_glb
@@ -120,5 +122,5 @@ resource "google_compute_global_forwarding_rule" "global_forwarding_rule" {
   port_range            = 80
   ip_address            = google_compute_global_address.glb_ext_ip.id
 
-  
+
 }

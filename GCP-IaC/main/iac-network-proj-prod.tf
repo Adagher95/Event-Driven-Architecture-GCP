@@ -1,23 +1,23 @@
 #Resourse Project Network
 resource "google_project" "iac-network-proj-prod" {
-  name       = "iac-network-proj-prod"
-  project_id = "iac-network-proj-prod"
+  name            = "iac-network-proj-prod"
+  project_id      = "iac-network-proj-prod"
   billing_account = data.google_secret_manager_secret_version.billing_account.secret_data
-  folder_id = google_folder.network.id
+  folder_id       = google_folder.network.id
 }
 
 # Enabling the CRM API
 resource "google_project_service" "iac-network-proj-prod-crm-service" {
-  project = google_project.iac-network-proj-prod.id
-  service = "cloudresourcemanager.googleapis.com"
+  project                    = google_project.iac-network-proj-prod.id
+  service                    = "cloudresourcemanager.googleapis.com"
   disable_dependent_services = true
 }
 
 # Enabling the Services and APIs
 resource "google_project_service" "iac-network-proj-prod-services" {
-  count = length(var.iac-network-proj-prod-services)    
-  project = var.host_project_id
-  service = var.iac-network-proj-prod-services[count.index]
+  count                      = length(var.iac-network-proj-prod-services)
+  project                    = var.host_project_id
+  service                    = var.iac-network-proj-prod-services[count.index]
   disable_dependent_services = true
 }
 

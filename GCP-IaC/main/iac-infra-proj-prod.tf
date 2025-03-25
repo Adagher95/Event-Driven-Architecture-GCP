@@ -1,23 +1,23 @@
 #Resourse Project Infrastructure
 resource "google_project" "iac-infra-proj-prod" {
-  name       = "iac-infra-proj-prod"
-  project_id = "iac-infra-proj-prod"
+  name            = "iac-infra-proj-prod"
+  project_id      = "iac-infra-proj-prod"
   billing_account = data.google_secret_manager_secret_version.billing_account.secret_data
-  folder_id = google_folder.infrastructure.id
+  folder_id       = google_folder.infrastructure.id
 }
 
 # Enabling the CRM API
 resource "google_project_service" "iac-infra-proj-prod-crm-service" {
-  project = google_project.iac-infra-proj-prod.id
-  service = "cloudresourcemanager.googleapis.com"
+  project                    = google_project.iac-infra-proj-prod.id
+  service                    = "cloudresourcemanager.googleapis.com"
   disable_dependent_services = true
 }
 
 # Enabling the Services and APIs
 resource "google_project_service" "iac-infra-proj-services" {
-  count = length(var.iac-infra-proj-prod-services)    
-  project = var.service_project_id
-  service = var.iac-infra-proj-prod-services[count.index]
+  count                      = length(var.iac-infra-proj-prod-services)
+  project                    = var.service_project_id
+  service                    = var.iac-infra-proj-prod-services[count.index]
   disable_dependent_services = true
 }
 

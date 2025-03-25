@@ -6,7 +6,7 @@ resource "google_container_cluster" "app_cluster" {
   project            = google_project.iac-infra-proj-prod.project_id
   network            = var.host_network
   subnetwork         = var.host_subnet_1
-  
+
   remove_default_node_pool = true
 
   deletion_protection = false
@@ -16,22 +16,20 @@ resource "google_container_cluster" "app_cluster" {
     services_secondary_range_name = "service-cidr1"
   }
 
-  
-  
-
   workload_identity_config {
-  workload_pool = var.clusters_identity_namespace.workload_pool
+    workload_pool = var.clusters_identity_namespace.workload_pool
+  }
 }
-}
+
 
 # Management Cluster Configuration 
 resource "google_container_cluster" "management_cluster" {
-  name               = var.gke_cluster_2_name
-  location           = var.gcp_region_2
-  initial_node_count = var.gke_cluster_2_initial_nodes
-  project            = google_project.iac-infra-proj-prod.project_id
-  network            = var.host_network
-  subnetwork         = var.host_subnet_2
+  name                     = var.gke_cluster_2_name
+  location                 = var.gcp_region_2
+  initial_node_count       = var.gke_cluster_2_initial_nodes
+  project                  = google_project.iac-infra-proj-prod.project_id
+  network                  = var.host_network
+  subnetwork               = var.host_subnet_2
   remove_default_node_pool = true
 
   deletion_protection = false
@@ -42,8 +40,8 @@ resource "google_container_cluster" "management_cluster" {
   }
 
   workload_identity_config {
-  workload_pool = var.clusters_identity_namespace.workload_pool
-}
+    workload_pool = var.clusters_identity_namespace.workload_pool
+  }
 }
 
 

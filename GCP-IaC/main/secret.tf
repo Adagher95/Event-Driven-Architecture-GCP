@@ -61,3 +61,20 @@ resource "google_secret_manager_secret" "billing_account" {
     }
   }
 }
+
+resource "google_secret_manager_secret" "organization_id" {
+  project   = var.security_project_id
+  secret_id = "organization id"
+
+  replication {
+    user_managed {
+      replicas {
+        location = "us-central1"
+      }
+      replicas {
+        location = "europe-west1"
+      }
+    }
+  }
+}
+

@@ -1,23 +1,23 @@
 variable "project_id" {
-    type = string
-    description = "The project ID that I will be working with"
+  type        = string
+  description = "The project ID that I will be working with"
 }
 
 variable "credentials_file" {
-    type = string
-    description = "The JSON credential file to be used within the provider.tf file"
+  type        = string
+  description = "The JSON credential file to be used within the provider.tf file"
 }
 
 variable "gcp_region" {
-    type = string
-    description = "The primary GCP region to deploy the resources"
-    default = "us-west1"
+  type        = string
+  description = "The primary GCP region to deploy the resources"
+  default     = "us-west1"
 }
 
 variable "gcp_zone" {
-    type = string
-    description = "The primary GCP zone within the region to be used"
-    default = "us-west1-a"
+  type        = string
+  description = "The primary GCP zone within the region to be used"
+  default     = "us-west1-a"
 }
 
 variable "organization_id" {
@@ -212,7 +212,7 @@ variable "gke_cluster_2_name" {
   description = "The value of the Management cluster name"
 }
 
- 
+
 variable "gke_cluster_1_node_pool_name" {
   type        = string
   description = "The value of the App cluster node pool name"
@@ -238,9 +238,9 @@ variable "node_config_1" {
   description = "The app cluster nodes configuration values and properties"
   type = object(
     {
-      machine_type          = string
-      disk_size_gb    = number
-      disk_type           = string
+      machine_type = string
+      disk_size_gb = number
+      disk_type    = string
     }
   )
 }
@@ -249,9 +249,9 @@ variable "node_config_2" {
   description = "The management cluster nodes configuration values and properties"
   type = object(
     {
-      machine_type          = string
-      disk_size_gb    = number
-      disk_type           = string
+      machine_type = string
+      disk_size_gb = number
+      disk_type    = string
     }
   )
 }
@@ -268,20 +268,20 @@ variable "gke_cluster_2_initial_nodes" {
 
 variable "gke_cluster_1_autoscaling" {
   description = "The Autoscaling configuration values of node per zone for the app cluster"
-  type        = object(
+  type = object(
     {
-      min_node_count = number   
-      max_node_count = number  
+      min_node_count = number
+      max_node_count = number
     }
   )
 }
 
 variable "gke_cluster_2_autoscaling" {
   description = "The Autoscaling configuration values of node per zone for the management cluster"
-  type        = object(
+  type = object(
     {
-      min_node_count = number   
-      max_node_count = number   
+      min_node_count = number
+      max_node_count = number
     }
   )
 }
@@ -313,12 +313,12 @@ variable "mysql_instance" {
 
 
 variable "pubsub_topic_name" {
-  type = string
+  type        = string
   description = "the Cloud Pub/Sub Topic name"
 }
 
 variable "pubsub_subscription_name" {
-  type = string
+  type        = string
   description = "the Cloud Pub/Sub Subsicription name"
 }
 
@@ -330,7 +330,7 @@ variable "cloud_function_name" {
 
 
 variable "entry_point" {
-  type = string
+  type        = string
   description = "The Entry point for the cloud function"
 }
 
@@ -349,4 +349,14 @@ variable "app_name" {
   description = "The value of the App name"
 }
 
-
+variable "cloud_armor_policies" {
+  type = map(object({
+    action      = string
+    priority    = string
+    preview     = bool
+    expression  = string
+    description = string
+    })
+  )
+  description = "The list of Cloud Armor rules to be created"
+}

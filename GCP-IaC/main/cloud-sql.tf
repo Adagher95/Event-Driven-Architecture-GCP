@@ -30,7 +30,7 @@ resource "google_sql_database_instance" "mysql_instance" {
 
       backup_retention_settings {
         retained_backups = 15
-      }  
+      }
     }
 
     ip_configuration {
@@ -40,20 +40,20 @@ resource "google_sql_database_instance" "mysql_instance" {
     }
 
     user_labels = {
-      environment    = "prod"
-      app-name       = var.mysql_instance.app_name
-      role           = "db"
+      environment = "prod"
+      app-name    = var.mysql_instance.app_name
+      role        = "db"
     }
 
     deletion_protection_enabled = var.mysql_instance.instance_deletion_protection
-    
+
   }
 
   depends_on = [
     time_sleep.cloud_sql_delay_create_45s
   ]
 
-}   
+}
 
 
 # The app database

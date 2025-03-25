@@ -9,9 +9,9 @@ resource "google_compute_health_check" "health_check_glb" {
   unhealthy_threshold = 2
 
   http_health_check {
-    port = "80"
+    port         = "80"
     request_path = "/"
-  
+
   }
 }
 
@@ -26,7 +26,7 @@ resource "google_compute_health_check" "health_check_igm" {
   unhealthy_threshold = 2
 
   http_health_check {
-    port = "80"
-    request_path = "/"  
+    port         = "80"
+    request_path = "/"
   }
 }
